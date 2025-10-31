@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+
+{% block title %}Asistente Virtual Emocional 🤖{% endblock %}
+
+{% block content %}
+<style>
+    .chat-container {
+        background: #f7f9fc;
+        border-radius: 15px;
+        padding: 20px;
+        max-width: 700px;
+        margin: 0 auto;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        max-height: 500px;
+        overflow-y: auto;
+    }
+
+    .message {
+        margin: 12px 0;
+        display: flex;
+        flex-direction: column;
+        animation: fadeIn 0.3s ease-in;
+    }
+
+    .user {
+        align-items: flex-end;
+    }
+
+    .assistant {
+        align-items: flex-start;
+    }
+
+    .bubble {
+        padding: 10px 15px;
+        border-radius: 18px;
+        max-width: 80%;
+        line-height: 1.4;
+        font-size: 16px;
+        word-wrap: break-word;
+    }
+
+    .bubble-user {
+        background-color: #6c5ce7;
+        color: white;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bubble-assistant {
+        background-color: #dfe6e9;
+        color: #2d3436;
+        border-bottom-left-radius: 5px;
+    }
+
+    .timestamp {
+        font-size: 12px;
+        color: gray;
+        margin-top: 5px;
+    }
+
+    .chat-form {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    input[name="mensaje"] {
+        width: 70%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+    }
+
+    button[type="submit"] {
+        background-color: #6c5ce7;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        padding: 10px 20px;
+        cursor: pointer;
+        transition: 0.3s;
+    }
+
+    button[type="submit"]:hover {
+        background-color: #5a4de7;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
+
+<h2 style="text-align:center; color:#2d3436;">Asistente Virtual Emocional 🤖</h2>
+
+<div class="chat-container">
+    {% if historial %}
+        {% for msg in historial %}
+            <div class="message user">
+                <div class="bubble bubble-user">
+                    <strong>Tú:</strong> {{ msg["mensaje_usuario"] }}
+                </div>
+                <span class="timestamp">{{ msg["fecha"] }}</span>
+            </div>
+
+            <div class="message assistant">
+                <div class="bubble bubble-assistant">
+                    <strong>Asistente:</strong> {{ msg["respuesta_asistente"] }}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; color:gray;">Aún no hay mensajes. ¡Inicia la conversación!</p>
+    {% endif %}
+</div>
+
+<form method="post" class="chat-form">
+    <input type="text" name="mensaje" placeholder="Escribe tu mensaje..." required>
+    <button type="submit">Enviar 💬</button>
+</form>
+
+<div style="text-align:center; margin-top:20px;">
+    <a href="{{ url_for('home') }}" class="btn" style="background-color:#6c5ce7; color:white; padding:10px 15px; border-radius:8px; text-decoration:none;">
+        ← Volver al inicio
+    </a>
+</div>
+{% endblock %}

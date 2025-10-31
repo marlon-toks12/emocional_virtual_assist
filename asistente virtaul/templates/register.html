@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Registro{% endblock %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <h2>Registro de Usuario</h2>
+    <form method="post">
+        <input type="text" name="nombre" placeholder="Nombre completo" required><br>
+        <input type="text" name="telefono" placeholder="Teléfono" required><br>
+        <input type="text" name="direccion" placeholder="Dirección" required><br>
+        <input type="email" name="correo" placeholder="Correo electrónico" required><br>
+        <input type="text" name="usuario" placeholder="Nombre de usuario" required><br>
+        <input type="password" name="clave" placeholder="Contraseña" required><br>
+        <button type="submit">Registrarse</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    <p style="margin-top: 15px;">
+        ¿Ya tienes cuenta? <a href="{{ url_for('login') }}">Inicia sesión</a>
+    </p>    
+{% endblock %}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Mi Aplicación{% endblock %}</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #74b9ff, #a29bfe);
+            color: #2d3436;
+            margin: 0;
+            padding: 0;
+        }
+
+        nav {
+            background-color: #0984e3;
+            color: white;
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            margin: 0;
+            font-size: 1.5em;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            font-weight: 600;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 60px auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 40px;
+            text-align: center;
+        }
+
+        button, .btn {
+            background-color: #00b894;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        button:hover, .btn:hover {
+            background-color: #009975;
+            transform: translateY(-2px);
+        }
+
+        .error {
+            color: red;
+            font-size: 0.9em;
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #74b9ff;
+            color: white;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <h1>Mi Aplicación</h1>
+        <div>
+            <a href="{{ url_for('index') }}">Inicio</a>
+            <a href="{{ url_for('login') }}">Iniciar sesión</a>
+            <a href="{{ url_for('register') }}">Registrarse</a>
+            {% if session.get("usuario_id") %}
+                <a href="{{ url_for('logout') }}">Cerrar sesión</a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <div class="container">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        &copy; {{ 2025 }} Mi Aplicación - Todos los derechos reservados.
+    </footer>
+</body>
+</html>

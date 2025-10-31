@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Bienvenido{% endblock %}
+
+{% block content %}
+    <h2>Bienvenido, {{ user["nombre"] }}</h2>
+    <p>Estos son tus datos registrados:</p>
+
+    <table style="margin: 20px auto; border-collapse: collapse; width: 80%;">
+        <tr><td><strong>Nombre:</strong></td><td>{{ user["nombre"] }}</td></tr>
+        <tr><td><strong>Teléfono:</strong></td><td>{{ user["telefono"] }}</td></tr>
+        <tr><td><strong>Dirección:</strong></td><td>{{ user["direccion"] }}</td></tr>
+        <tr><td><strong>Correo:</strong></td><td>{{ user["correo"] }}</td></tr>
+        <tr><td><strong>Usuario:</strong></td><td>{{ user["usuario"] }}</td></tr>
+    </table>
+
+    <a href="{{ url_for('logout') }}" class="btn" style="background-color: #d63031;">Cerrar sesión</a>
+    <a href="{{ url_for('asistente') }}" class="btn" style="background-color: #00b894;">Abrir Asistente Virtual</a>
+
+{% endblock %}
